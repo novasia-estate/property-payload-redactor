@@ -14,7 +14,7 @@ It is **not an anonymization guarantee**. Every result requires human review. A 
 
 ```clojure
 ;; deps.edn, using Clojars as a repository
-{:deps {org.clojars.novasia-estate/property-payload-redactor {:mvn/version "1.0.0"}}}
+{:deps {net.clojars.novasia-estate/property-payload-redactor {:mvn/version "1.0.0"}}}
 ```
 
 Requires Clojure 1.12.6. Java 17 and 21 are checked. No runtime dependencies beyond Clojure and its normal runtime dependencies.

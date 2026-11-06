@@ -17,7 +17,7 @@ def build(directory):
     files={str(p.relative_to(ROOT/'src')).replace('\\','/'):p.read_bytes() for p in (ROOT/'src').rglob('*.clj')}
     for name in ['README.md','LICENSE']:
         files['META-INF/'+name]=(ROOT/name).read_bytes()
-    files['META-INF/maven/org.clojars.novasia-estate/property-payload-redactor/pom.xml']=(ROOT/'pom.xml').read_bytes()
+    files['META-INF/maven/net.clojars.novasia-estate/property-payload-redactor/pom.xml']=(ROOT/'pom.xml').read_bytes()
     files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nImplementation-Title: Property Payload Redactor\r\nImplementation-Version: 1.0.0\r\n\r\n'
     with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as output:
         for name,data in sorted(files.items()):
