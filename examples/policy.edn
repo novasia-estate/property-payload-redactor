@@ -1,0 +1,5 @@
+{:id :copy-scalar
+ :title :redact-text
+ :description :redact-text
+ :url :clean-url
+ :photos [{:url :clean-url :caption :redact-text}]}

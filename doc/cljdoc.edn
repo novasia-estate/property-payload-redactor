@@ -1,0 +1,5 @@
+{:cljdoc.doc/tree
+ [["Readme" {:file "README.md"}]
+  ["Projection contract" {:file "docs/input.md"}]
+  ["Text and URL limits" {:file "docs/limits.md"}]
+  ["Integration and review" {:file "docs/integration.md"}]]}

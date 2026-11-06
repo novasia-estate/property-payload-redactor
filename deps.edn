@@ -1,0 +1,3 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.6"}}
+ :aliases {:test {:extra-paths ["test"] :main-opts ["-m" "novasia.payload-redactor.test-runner"]}}}

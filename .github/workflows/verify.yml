@@ -1,0 +1,26 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['17','21']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - run: python3 tools/build.py runtime /tmp/redactor-runtime
+      - run: java -cp '/tmp/redactor-runtime/*:src:test' clojure.main -m novasia.payload-redactor.test-runner
+      - run: python3 tools/build.py jar /tmp/redactor-dist
+      - name: Actual JAR and CLI consumer
+        run: |
+          java -cp '/tmp/redactor-runtime/*:/tmp/redactor-dist/property-payload-redactor-1.0.0.jar' clojure.main -m novasia.payload-redactor.cli examples/policy.edn examples/payload.edn /tmp/payload.edn /tmp/audit.edn
+          grep -q '\[email\]' /tmp/payload.edn
+          grep -q ':review-required true' /tmp/audit.edn
+          ! grep -q 'SYNTHETIC PRIVATE' /tmp/payload.edn
+          ! grep -q 'demo.agent@example.com' /tmp/payload.edn
